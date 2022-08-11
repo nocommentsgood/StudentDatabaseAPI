@@ -11,10 +11,9 @@ public class MainController {
     private StudentRepository studentRepository;
 
     @PostMapping(path="/add")
-    public @ResponseBody String addNewStudent (@RequestParam Integer studentid, @RequestParam String firstname, @RequestParam String lastname,
-                                               @RequestParam Integer studentyear, @RequestParam Integer balance){
+    public @ResponseBody String addNewStudent (@RequestParam(value="firstname") String firstname, @RequestParam(value="lastname") String lastname,
+                                               @RequestParam(value="studentyear") Integer studentyear, @RequestParam(value="balance") Integer balance){
         Student student = new Student();
-        student.setStudentid(studentid);
         student.setFirstName(firstname);
         student.setLastName(lastname);
         student.setStudentyear(studentyear);

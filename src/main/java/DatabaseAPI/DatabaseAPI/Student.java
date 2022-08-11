@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Student {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer studentid;
     private String firstName;
     private String lastName;
