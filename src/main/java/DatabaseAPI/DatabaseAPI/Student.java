@@ -7,19 +7,19 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer studentid;
+    private Integer studentID;
     private String firstName;
     private String lastName;
-    private Integer studentyear;
+    private Integer studentYear;
     private Integer balance;
 
 
-    public Integer getStudentyear() {
-        return studentyear;
+    public Integer getStudentYear() {
+        return studentYear;
     }
 
-    public void setStudentyear(Integer studentyear) {
-        this.studentyear = studentyear;
+    public void setStudentYear(Integer studentYear) {
+        this.studentYear = studentYear;
     }
 
     public Integer getBalance() {
@@ -30,12 +30,12 @@ public class Student {
         this.balance = balance;
     }
 
-    public Integer getStudentid(){
-        return studentid;
+    public Integer getStudentID(){
+        return studentID;
     }
 
-    public void setStudentid(Integer studentid) {
-        this.studentid = studentid;
+    public void setStudentID(Integer studentID) {
+        this.studentID = studentID;
     }
 
     public String getFirstName() {
@@ -52,5 +52,10 @@ public class Student {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("Student Info: %n First Name: %s%n Last Name: %s%n Year: %d%n Balance: %d", getFirstName(), getLastName(), getStudentYear(), getBalance());
     }
 }

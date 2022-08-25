@@ -13,15 +13,18 @@ public class MainController {
 
     @CrossOrigin
     @PostMapping(path="/student")
-    public @ResponseBody String addNewStudent (@RequestParam(value="firstname") String firstname, @RequestParam(value="lastname") String lastname,
-                                               @RequestParam(value="studentyear") Integer studentyear, @RequestParam(value="balance") Integer balance){
-        Student student = new Student();
-        student.setFirstName(firstname);
-        student.setLastName(lastname);
-        student.setStudentyear(studentyear);
-        student.setBalance(balance);
-        studentRepository.save(student);
-        return "Saved";
+    public @ResponseBody Student addNewStudent (@RequestParam(value="studentID", required = false) Integer studentID, @RequestBody Student passedStudent){
+        Student newStudent = new Student();
+        if (passedStudent.getStudentID() != null){
+            newStudent.setStudentID(passedStudent.getStudentID());
+        }
+        newStudent.setFirstName(passedStudent.getFirstName());
+        newStudent.setLastName(passedStudent.getLastName());
+        newStudent.setStudentYear(passedStudent.getStudentYear());
+        newStudent.setBalance(passedStudent.getBalance());
+        System.out.println(passedStudent);
+        studentRepository.save(newStudent);
+        return newStudent;
     }
 
     @CrossOrigin
@@ -33,7 +36,7 @@ public class MainController {
 
     @CrossOrigin
     @GetMapping(path="/id")
-    public Optional<Student> getStudent(@RequestParam(value="studentid") Integer studentid) {
-        return studentRepository.findById(studentid);
+    public Optional<Student> getStudent(@RequestParam(value="studentID") Integer studentID) {
+        return studentRepository.findById(studentID);
     }
 }
