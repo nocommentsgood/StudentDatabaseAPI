@@ -1,6 +1,7 @@
 package DatabaseAPI.DatabaseAPI;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
@@ -38,5 +39,11 @@ public class MainController {
     @GetMapping(path="/id")
     public Optional<Student> getStudent(@RequestParam(value="studentID") Integer studentID) {
         return studentRepository.findById(studentID);
+    }
+
+    @CrossOrigin
+    @DeleteMapping(path="/id/delete")
+    public void deleteStudent(@RequestParam Integer studentID){
+        studentRepository.deleteById(studentID);
     }
 }
