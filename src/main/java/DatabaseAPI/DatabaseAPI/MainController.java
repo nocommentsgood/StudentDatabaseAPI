@@ -14,7 +14,7 @@ public class MainController {
 
     @CrossOrigin
     @PostMapping(path="/student")
-    public @ResponseBody Student addNewStudent (@RequestParam(value="studentID", required = false) Integer studentID, @RequestBody Student passedStudent){
+    public @ResponseBody Student addNewStudent (@RequestBody Student passedStudent){
         Student newStudent = new Student();
         if (passedStudent.getStudentID() != null){
             newStudent.setStudentID(passedStudent.getStudentID());
@@ -37,7 +37,7 @@ public class MainController {
 
     @CrossOrigin
     @GetMapping(path="/id")
-    public Optional<Student> getStudent(@RequestParam(value="studentID") Integer studentID) {
+    public @ResponseBody Optional<Student> getStudent(@RequestParam Integer studentID) {
         return studentRepository.findById(studentID);
     }
 
@@ -45,5 +45,23 @@ public class MainController {
     @DeleteMapping(path="/id/delete")
     public void deleteStudent(@RequestParam Integer studentID){
         studentRepository.deleteById(studentID);
+    }
+
+    @CrossOrigin
+    @PutMapping(path="/update")
+    public @ResponseBody Optional<Student> updateStudent(@RequestBody Student passedStudent){
+        if (!studentRepository.existsById(passedStudent.getStudentID())){
+            addNewStudent(passedStudent);
+            return Optional.of(passedStudent);
+        }
+
+        return studentRepository.findById(passedStudent.getStudentID()).map(student -> {
+            student.setFirstName(passedStudent.getFirstName());
+            student.setLastName(passedStudent.getLastName());
+            student.setStudentYear(passedStudent.getStudentYear());
+            student.setBalance(passedStudent.getBalance());
+            studentRepository.save(student);
+            return student;
+        });
     }
 }

@@ -56,6 +56,6 @@ public class Student {
 
     @Override
     public String toString(){
-        return String.format("Student Info: %n First Name: %s%n Last Name: %s%n Year: %d%n Balance: %d", getFirstName(), getLastName(), getStudentYear(), getBalance());
+        return String.format("Student Info: %n Student ID: %d%n First Name: %s%n Last Name: %s%n Year: %d%n Balance: %d", getStudentID(), getFirstName(), getLastName(), getStudentYear(), getBalance());
     }
 }
