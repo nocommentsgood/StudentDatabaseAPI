@@ -6,12 +6,13 @@ import javax.persistence.*;
 public class Student {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer studentID;
     private String firstName;
     private String lastName;
     private Integer studentYear;
     private Integer balance;
+    //protected ArrayList<Course> courses = new ArrayList<>();
 
 
     public Integer getStudentYear() {
@@ -30,7 +31,7 @@ public class Student {
         this.balance = balance;
     }
 
-    public Integer getStudentID(){
+    public Integer getStudentID() {
         return studentID;
     }
 
@@ -54,8 +55,22 @@ public class Student {
         this.lastName = lastName;
     }
 
+    /*public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(ArrayList<Course> courses) {
+        this.courses = courses;
+    }*/
+
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("Student Info: %n Student ID: %d%n First Name: %s%n Last Name: %s%n Year: %d%n Balance: %d", getStudentID(), getFirstName(), getLastName(), getStudentYear(), getBalance());
     }
+
+    public void addStudentCourses(Integer courseID) {
+
+    }
+
+
 }

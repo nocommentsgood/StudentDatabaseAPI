@@ -1,22 +1,24 @@
 package DatabaseAPI.DatabaseAPI;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path="/api")
+@RequestMapping(path = "/api")
 public class MainController {
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private CourseRepository coursesRepository;
 
     @CrossOrigin
-    @PostMapping(path="/student")
-    public @ResponseBody Student addNewStudent (@RequestBody Student passedStudent){
+    @PostMapping(path = "/student")
+    public @ResponseBody Student addNewStudent(@RequestBody Student passedStudent) {
         Student newStudent = new Student();
-        if (passedStudent.getStudentID() != null){
+        if (passedStudent.getStudentID() != null) {
             newStudent.setStudentID(passedStudent.getStudentID());
         }
         newStudent.setFirstName(passedStudent.getFirstName());
@@ -29,28 +31,28 @@ public class MainController {
     }
 
     @CrossOrigin
-    @GetMapping(path="/students")
-    public @ResponseBody Iterable<Student> getAllStudents(){
+    @GetMapping(path = "/students")
+    public @ResponseBody Iterable<Student> getAllStudents() {
         // this returns a JSON or XML with the students
         return studentRepository.findAll();
     }
 
     @CrossOrigin
-    @GetMapping(path="/id")
+    @GetMapping(path = "/id")
     public @ResponseBody Optional<Student> getStudent(@RequestParam Integer studentID) {
         return studentRepository.findById(studentID);
     }
 
     @CrossOrigin
-    @DeleteMapping(path="/id/delete")
-    public void deleteStudent(@RequestParam Integer studentID){
+    @DeleteMapping(path = "/id/delete")
+    public void deleteStudent(@RequestParam Integer studentID) {
         studentRepository.deleteById(studentID);
     }
 
     @CrossOrigin
-    @PutMapping(path="/update")
-    public @ResponseBody Optional<Student> updateStudent(@RequestBody Student passedStudent){
-        if (!studentRepository.existsById(passedStudent.getStudentID())){
+    @PutMapping(path = "/update")
+    public @ResponseBody Optional<Student> updateStudent(@RequestBody Student passedStudent) {
+        if (!studentRepository.existsById(passedStudent.getStudentID())) {
             addNewStudent(passedStudent);
             return Optional.of(passedStudent);
         }
@@ -64,4 +66,30 @@ public class MainController {
             return student;
         });
     }
+
+    @CrossOrigin
+    @GetMapping(path = "/courses")
+    public @ResponseBody Iterable<Course> getAllCourses() {
+        return coursesRepository.findAll();
+    }
+
+/*
+    @CrossOrigin
+    @PutMapping(path="/id/addcourse")
+    public @ResponseBody Optional<Student> updateCourses(@RequestBody Student passedStudent, @RequestBody ArrayList<Integer> coursesToAdd) {
+        passedStudent.courses.get(0);
+        for (int i = 0; i < passedStudent.courses.size(); i ++){
+            if (!Objects.equals(passedStudent.courses.get(i).getCourseID(), coursesToAdd.get(i))) {
+                passedStudent.courses.add(coursesToAdd.)
+            }
+        }
+    }*/
+
+    /*
+    To add courses, student id will be passed from front end.
+    JSON containing courses will also be passed
+    Find student by id
+    sanitize listOfPassedCourses
+    student.addCourses(listOfPassedCourses)
+     */
 }
