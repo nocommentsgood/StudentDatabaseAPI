@@ -19,24 +19,20 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "course_id", nullable = false)
     private Integer courseID;
-
-    @Column(name = "[coursename]")
-    private String courseName;
-
     @Column(name = "[cost]")
     private Integer courseCost;
 
-    @Column(name = "[prof_id]")
-    private Integer professorID;
+    @Column(name = "[student_id]")
+    private Integer studentID;
 
-    public Integer getProfessorID() {
-        return professorID;
+
+    public Integer getStudentID() {
+        return studentID;
     }
 
-    public void setProfessorID(Integer professorID) {
-        this.professorID = professorID;
+    public void setStudentID(Integer studentID) {
+        this.studentID = studentID;
     }
-
 
     public Integer getCourseID() {
         return courseID;
@@ -44,14 +40,6 @@ public class Course {
 
     public void setCourseID(Integer courseID) {
         this.courseID = courseID;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
     }
 
     public Integer getCourseCost() {

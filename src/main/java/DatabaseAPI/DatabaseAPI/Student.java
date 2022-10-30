@@ -1,6 +1,7 @@
 package DatabaseAPI.DatabaseAPI;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 public class Student {
@@ -12,8 +13,6 @@ public class Student {
     private String lastName;
     private Integer studentYear;
     private Integer balance;
-    //protected ArrayList<Course> courses = new ArrayList<>();
-
 
     public Integer getStudentYear() {
         return studentYear;
@@ -55,22 +54,9 @@ public class Student {
         this.lastName = lastName;
     }
 
-    /*public ArrayList<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(ArrayList<Course> courses) {
-        this.courses = courses;
-    }*/
-
     @Override
     public String toString() {
         return String.format("Student Info: %n Student ID: %d%n First Name: %s%n Last Name: %s%n Year: %d%n Balance: %d", getStudentID(), getFirstName(), getLastName(), getStudentYear(), getBalance());
     }
-
-    public void addStudentCourses(Integer courseID) {
-
-    }
-
 
 }

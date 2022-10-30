@@ -14,6 +14,9 @@ public class MainController {
     @Autowired
     private CourseRepository coursesRepository;
 
+    @Autowired
+    private CourseNameRepository courseNameRepository;
+
     @CrossOrigin
     @PostMapping(path = "/student")
     public @ResponseBody Student addNewStudent(@RequestBody Student passedStudent) {
@@ -69,8 +72,8 @@ public class MainController {
 
     @CrossOrigin
     @GetMapping(path = "/courses")
-    public @ResponseBody Iterable<Course> getAllCourses() {
-        return coursesRepository.findAll();
+    public @ResponseBody Iterable<CourseNames> getAllCourses() {
+        return courseNameRepository.findAll();
     }
 
 /*
@@ -92,4 +95,16 @@ public class MainController {
     sanitize listOfPassedCourses
     student.addCourses(listOfPassedCourses)
      */
+
+    /*@CrossOrigin
+    @PutMapping(path="/addcourse")
+    public @ResponseBody Student addStudentCourses(@RequestBody Student studentToUpdate, ArrayList<Integer> courseIDsToAdd){
+        var studentCourses = studentToUpdate.getCourses();
+        for (Integer integer : courseIDsToAdd) {
+            if (!studentCourses.contains(integer)) studentCourses.add(integer);
+        }
+        studentRepository.save(studentToUpdate);
+    return studentToUpdate;
+
+    }*/
 }
